@@ -1,6 +1,16 @@
-# vue-firebase
+#
+# E-health, a Vue Application
 
-> Firebase app with vue
+> This application is created to propagate the idea of analyzing user data. It implements statistical charts to analyze user data including population ranging from age to blood group.
+
+# Table of Contents
+  * [Build Setup](#build-setup)
+  * [Practices](#practices)
+    * [General guidelines](#general-guidelines)
+    * [1. Use Vuex](#1-use-vuex)
+  * [Todo](#todo)
+
+> A Firebase app with vue
 
 ## Build Setup
 

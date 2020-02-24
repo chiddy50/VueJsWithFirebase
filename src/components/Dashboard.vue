@@ -14,7 +14,7 @@
                             <option value="0" disabled selected>Blood Group</option>
                             <option v-for="(group, index) in blood_groups" :value="group" :key="index">{{ group }}</option>
                         </select>
-                        <div v-if="onlineState" class="input-group-append">
+                        <div v-if="getIsInternetConnected" class="input-group-append">
                           <button v-if="!createLoading" @click.prevent="saveUser" class="input-group-text btn btn-info">Add</button>
                           <button v-else :disabled="createLoading" class="input-group-text btn btn-info">Creating</button>
                         </div>
@@ -187,7 +187,6 @@ export default{
     addToStorage(user){
       this.users.push(user)
       localStorage.setItem('users', JSON.stringify(this.users));
-      this.$router.push('/users')
     },
 
     updateOneUserInStorage(id, user_id){
