@@ -3,12 +3,14 @@
 </template>
 
 <script>
-
+import { mapState } from 'vuex';
 import Highcharts from 'highcharts';
+
 export default {
   name: 'BloodGroupChart',
-  props: ['allusers'],
   computed: {
+    ...mapState(['users']),
+
     bloodGroupData(){
       let o_negative = []
       let o_positive = []
@@ -19,7 +21,7 @@ export default {
       let ab_negative = []
       let ab_positive = []
 
-			this.allusers.filter(user => {
+			this.users.filter(user => {
 				if (user.blood_group === 'O-') {
           o_negative.push(user)
 				}else if (user.blood_group === 'O+') {
@@ -74,10 +76,12 @@ export default {
         },
         xAxis: {
           categories: blood_groups,
-          crosshair: true
+          crosshair: true,
+          allowDecimals: false
         },
         yAxis: {
           min: 0,
+          max: 100,
           title: {
             text: 'Population'
           }

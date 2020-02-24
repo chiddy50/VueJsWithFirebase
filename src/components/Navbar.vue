@@ -12,10 +12,10 @@
             <div class="collapse navbar-collapse" id="collapsibleNavbar">
                 <ul class="navbar-nav">
                     <li class="nav-item">
-                        <router-link class="nav-link anchor-tags" tag="a" to="/">Home <i class="fa fa-home"></i></router-link>
+                      <router-link class="nav-link anchor-tags" tag="a" to="/">Home <i class="fa fa-home"></i></router-link>
                     </li>
                     <li class="nav-item">
-                        <router-link class="nav-link anchor-tags" tag="a" to="/all-users">Users  <i class="fa fa-user"></i></router-link>
+                      <router-link class="nav-link anchor-tags" tag="a" to="/all-users">Users  <i class="fa fa-user"></i></router-link>
                     </li>
                     <li v-if="onlineState" class="nav-item">
                       <a disabled class="nav-link online">We are Online</a>

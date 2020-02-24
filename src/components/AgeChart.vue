@@ -3,27 +3,28 @@
 </template>
 
 <script>
-
+import { mapState } from 'vuex'
 import Highcharts from 'highcharts'
 
 export default {
   name: 'AgeChart',
-  props: ['allusers'],
   computed: {
+    ...mapState(['users']),
+
     ageGroupData(){
       let age_0_19 = []
       let age_20_39 = []
       let age_40_59 = []
       let age_60_89 = []
       let age_90_above = []
-      this.allusers.filter(user => {
-        if (user.age > 0 && user.age < 20) {
+      this.users.filter(user => {
+        if (user.age >= "0" && user.age < "20") {
           age_0_19.push(user)
         }else if (user.age >= "20" && user.age < "40") {
           age_20_39.push(user)
         }else if (user.age >= "40" && user.age < "60") {
           age_40_59.push(user)
-        }else if (user.age >= "60" && user.age <= "90") {
+        }else if (user.age >= "60" && user.age < "90") {
           age_60_89.push(user)
         }else if (user.age >= "90") {
           age_90_above.push(user)
@@ -61,19 +62,22 @@ export default {
         },
         xAxis: {
           categories: age_groups,
-          crosshair: true
+          crosshair: true,
+          tickColor: 'orange'
         },
         yAxis: {
           min: 0,
+          max: 100,
           title: {
             text: 'Population'
-          }
+          },
         },
 
         series: [{
           name: 'Age Group',
           data: population
-        }]
+        }],
+        colors: ['orange']
       })
     }
   }
