@@ -7,9 +7,7 @@
   * [Build Setup](#build-setup)
   * [Practices](#practices)
     * [General guidelines](#general-guidelines)
-    * [1. Use Vuex](#1-use-vuex)
-    * [2. Use Vue-Router](#1-use-vue-router)
-  * [Todo](#todo)
+
 
 
 ## Build Setup
@@ -32,11 +30,6 @@ npm run build --report
 #### General guidelines
 - Always keep tests and code simple. Use idiomatic solutions (eg. Vuex test helpers, map functions, etc.) where you can.
 - Less code means that you have to read and understand less. Of course, it's only true if you keep your code readable! Do not satisfy readable code in favor of "so-called" elegant, short but hard to understand one.
-
-### 1. Use Vuex
-As it's very easy to integrate and it provides a clear and simple architecture to your application, Vuex should be used for simple projects as well without thinking too much.
-
-### 2. Use Vue-Router
 
 
 For a detailed explanation on how things work, check out the [guide](http://vuejs-templates.github.io/webpack/) and [docs for vue-loader](http://vuejs.github.io/vue-loader).

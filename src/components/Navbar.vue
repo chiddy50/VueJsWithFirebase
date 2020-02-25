@@ -21,7 +21,7 @@
                       <a disabled class="nav-link online">We are Online</a>
                     </li>
                     <li v-else class="nav-item">
-                      <a disabled class="nav-link online">We are Offline</a>
+                      <a disabled class="offline">We are Offline</a>
                     </li>
                 </ul>
             </div>
@@ -58,7 +58,7 @@ export default {
 
 <style scoped>
 .header{
-    background: #1abc9c;
+  background: #1abc9c;
 }
 
 .disabled{
@@ -66,11 +66,23 @@ export default {
 }
 
 .online{
-  color: #4eff4e;
+  color: #4eff4e !important;
+  display: block;
+  padding: .5rem 1rem;
 }
 
 .offline{
-  color: #e41111;
+  color: #f50c0c !important;
+  display: block;
+  padding: .5rem 1rem;
+}
+
+@media (min-width: 576px) {
+  .online, .offline{
+    padding-right: .5rem;
+    padding-left: .5rem;
+  }
+
 }
 
 .app-title{
@@ -78,7 +90,7 @@ export default {
 }
 
 .box{
-    box-shadow: 0 4px 8px 0 rgba(29, 28, 28, 0.2), 0 6px 10px 0 rgba(0, 0, 0, 0.19);
+  box-shadow: 0 4px 8px 0 rgba(29, 28, 28, 0.2), 0 6px 10px 0 rgba(0, 0, 0, 0.19);
 }
 
 .anchor-tags{

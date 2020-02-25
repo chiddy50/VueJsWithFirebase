@@ -4,7 +4,7 @@ import Dashboard from '@/components/Dashboard';
 import Users from '@/components/Users';
 import NotFound from '@/components/NotFound';
 
-Vue.use(Router)
+Vue.use(Router);
 
 export default new Router({
   mode: 'history',
