@@ -21,7 +21,7 @@ export default {
       let ab_negative = []
       let ab_positive = []
 
-			this.users.filter(user => {
+			this.$store.state.users.filter(user => {
 				if (user.blood_group === 'O-') {
           o_negative.push(user)
 				}else if (user.blood_group === 'O+') {

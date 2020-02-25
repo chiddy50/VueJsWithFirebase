@@ -15,17 +15,17 @@
                             <option v-for="(group, index) in blood_groups" :value="group" :key="index">{{ group }}</option>
                         </select>
                         <div v-if="getIsInternetConnected" class="input-group-append">
-                          <button v-if="!getCreateLoad" @click.prevent="saveUser" class="input-group-text btn btn-info">Add</button>
-                          <button v-else :disabled="getCreateLoad" class="input-group-text btn btn-info">Creating</button>
+                          <button v-if="!$store.state.createLoading" @click.prevent="saveUser" class="input-group-text btn btn-info">Add</button>
+                          <button v-else :disabled="$store.state.createLoading" class="input-group-text btn btn-info">Creating</button>
                         </div>
                         <div v-else class="input-group-append">
-                          <button :disabled="getCreateLoad" @click.prevent="saveUser" class="input-group-text btn btn-info">Add</button>
+                          <button :disabled="$store.state.createLoading" @click.prevent="saveUser" class="input-group-text btn btn-info">Add</button>
                         </div>
                     </div>
                 </form>
             </div>
 
-            <div v-if="getFetchLoad" class="col-sm-12 col-md-12 col-lg-12 mb-3">
+            <div v-if="$store.state.fetchUsersLoading" class="col-sm-12 col-md-12 col-lg-12 mb-3">
               <div class="box">
                 <div class="head pb-3">
                   <h5 class="text-center">Please wait...</h5>

@@ -17,7 +17,7 @@ export default {
       let age_40_59 = []
       let age_60_89 = []
       let age_90_above = []
-      this.users.filter(user => {
+      this.$store.state.users.filter(user => {
         if (user.age >= "0" && user.age < "20") {
           age_0_19.push(user)
         }else if (user.age >= "20" && user.age < "40") {
