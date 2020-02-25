@@ -81,7 +81,7 @@ export default {
   },
   computed: {
     ...mapState(['isInternetConnected', 'users','edit', 'blood_groups']),
-    ...mapGetters(["getIsInternetConnected", "getFetchLoad", "getUpdateLoad", "getDeleteLoad"])
+    ...mapGetters(["getIsInternetConnected"])
   },
 
   watch: {

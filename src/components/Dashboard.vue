@@ -15,8 +15,8 @@
                             <option v-for="(group, index) in blood_groups" :value="group" :key="index">{{ group }}</option>
                         </select>
                         <div v-if="getIsInternetConnected" class="input-group-append">
-                          <button v-if="!$store.state.createLoading" @click.prevent="saveUser" class="input-group-text btn btn-info">Add</button>
-                          <button v-else :disabled="$store.state.createLoading" class="input-group-text btn btn-info">Creating</button>
+                          <button @click.prevent="saveUser" class="input-group-text btn btn-info">Add</button>
+                          <!-- <button v-else disabled class="input-group-text btn btn-info">Creating</button> -->
                         </div>
                         <div v-else class="input-group-append">
                           <button :disabled="$store.state.createLoading" @click.prevent="saveUser" class="input-group-text btn btn-info">Add</button>
@@ -35,13 +35,13 @@
 
             <div class="col-sm-12 col-md-12 col-lg-12 mb-3">
                 <div class="box">
-                    <BloodGroupChart/>
+                    <BloodGroupChart v-if="$store.state.users.length"/>
                 </div>
             </div>
 
             <div class="col-sm-12 col-md-12 col-lg-12 mb-3">
                 <div class="box">
-                    <AgeChart/>
+                    <AgeChart v-if="$store.state.users.length"/>
                 </div>
             </div>
 
@@ -69,8 +69,14 @@ export default{
   },
 	computed: {
     ...mapState(['isInternetConnected', 'users', 'edit', 'blood_groups']),
-    ...mapGetters(["getIsInternetConnected", "getFetchLoad", "getCreateLoad"]),
-
+    ...mapGetters(["getIsInternetConnected"]),
+    btnText(){
+      if (this.$store.state.createLoading) {
+        return "Creating";
+      }else{
+        return "Add"
+      }
+    }
 	},
 	mounted(){
     this.fetchAllUsers()
@@ -95,8 +101,6 @@ export default{
 
   methods: {
     ...mapActions(['fetchAllUsers', 'saveUser'])
-
-
   }
 }
 </script>

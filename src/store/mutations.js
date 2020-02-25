@@ -59,6 +59,13 @@ export default{
         state.createLoading = true;
         db.collection('users').add(user)
         .then(docRef => {
+          Swal.fire({
+            position: 'top-end',
+            icon: 'success',
+            title: 'User Added',
+            showConfirmButton: false,
+            timer: 1500
+          });
           self.commit('addToStorage', user);
 
           let obj = {

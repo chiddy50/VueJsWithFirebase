@@ -9,7 +9,7 @@ import { mapGetters, mapActions, mapState } from 'vuex'
 export default {
   name: 'OnlineChecker',
 
-  created(){
+  beforeCreate(){
     setInterval(() => {
       if (window.navigator.onLine) {
         this.setConnection(true)
