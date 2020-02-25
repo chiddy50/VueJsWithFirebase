@@ -15,17 +15,17 @@
                   <option v-for="(group, index) in blood_groups" :value="group" :key="index">{{ group }}</option>
               </select>
               <div v-if="$store.state.isInternetConnected" class="input-group-append">
-                <button @click.prevent="updateUser" :disabled="getUpdateLoad" class="input-group-text btn btn-success">Edit</button>
+                <button @click.prevent="updateUser" :disabled="$store.state.updateLoading" class="input-group-text btn btn-success">Edit</button>
               </div>
               <div v-else class="input-group-append">
-                <button @click.prevent="updateStorage" :disabled="getUpdateLoad" class="input-group-text btn btn-success">Edit</button>
+                <button @click.prevent="updateStorage" :disabled="$store.state.updateLoading" class="input-group-text btn btn-success">Edit</button>
               </div>
             </div>
         </form>
       </div>
     </div>
 
-    <div v-if="getFetchLoad" class="col-sm-12 col-md-12 col-lg-12 pb-3">
+    <div v-if="$store.state.fetchUsersLoading" class="col-sm-12 col-md-12 col-lg-12 pb-3">
       <h5 class="text-center">Loading Users...</h5>
     </div>
 
@@ -46,8 +46,8 @@
               <td>{{ user.age }}</td>
               <td>{{ user.blood_group }}</td>
               <td>
-                <button v-if="$store.state.isInternetConnected" :disabled="deleteLoading" class="btn btn-danger" @click="deleteUser(user.user_id, index)"> <i class="fas fa-trash"></i></button>
-                <button v-else class="btn btn-danger" :disabled="getDeleteLoad" @click="removeFromStorage(user.user_id)"> <i class="fas fa-trash"></i></button>
+                <button v-if="$store.state.isInternetConnected" :disabled="$store.state.deleteLoading" class="btn btn-danger" @click="deleteUser(user.user_id, index)"> <i class="fas fa-trash"></i></button>
+                <button v-else class="btn btn-danger" :disabled="$store.state.deleteLoading" @click="removeFromStorage(user.user_id)"> <i class="fas fa-trash"></i></button>
               </td>
               <td>
                 <button class="btn btn-primary" @click="editUser(user)"> <i class="fas fa-pencil-alt"></i></button>
