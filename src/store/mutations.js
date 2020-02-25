@@ -5,6 +5,7 @@ import db from '../components/firebaseInit';
 export default{
   fetchAllUsers(state){
     var self = this;
+    state.users = [];
     if (state.isInternetConnected) {
       state.fetchUsersLoading = true;
       db.collection('users').orderBy('blood_group').get()

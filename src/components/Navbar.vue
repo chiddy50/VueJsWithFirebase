@@ -17,7 +17,7 @@
                     <li class="nav-item">
                       <router-link class="nav-link anchor-tags" tag="a" to="/all-users">Users  <i class="fa fa-user"></i></router-link>
                     </li>
-                    <li v-if="onlineState" class="nav-item">
+                    <li v-if="$store.state.isInternetConnected" class="nav-item">
                       <a disabled class="nav-link online">We are Online</a>
                     </li>
                     <li v-else class="nav-item">
@@ -35,23 +35,12 @@ import { mapGetters } from 'vuex'
 
 export default {
   name: 'Navbar',
-  data(){
-    return{
-      onlineState: false
-    }
-  },
+
   computed: {
     ...mapGetters(["getIsInternetConnected"])
   },
-  watch: {
-    getIsInternetConnected(){
-      this.onlineState = this.getIsInternetConnected
-    }
-  },
 
-  mounted(){
-    this.onlineState = this.getIsInternetConnected
-  }
+
 
 }
 </script>

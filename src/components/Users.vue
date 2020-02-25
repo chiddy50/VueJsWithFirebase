@@ -14,7 +14,7 @@
                   <option value="" selected>Blood Group</option>
                   <option v-for="(group, index) in blood_groups" :value="group" :key="index">{{ group }}</option>
               </select>
-              <div v-if="onlineState" class="input-group-append">
+              <div v-if="$store.state.isInternetConnected" class="input-group-append">
                 <button @click.prevent="updateUser" :disabled="getUpdateLoad" class="input-group-text btn btn-success">Edit</button>
               </div>
               <div v-else class="input-group-append">
@@ -46,7 +46,7 @@
               <td>{{ user.age }}</td>
               <td>{{ user.blood_group }}</td>
               <td>
-                <button v-if="onlineState" :disabled="deleteLoading" class="btn btn-danger" @click="deleteUser(user.user_id, index)"> <i class="fas fa-trash"></i></button>
+                <button v-if="$store.state.isInternetConnected" :disabled="deleteLoading" class="btn btn-danger" @click="deleteUser(user.user_id, index)"> <i class="fas fa-trash"></i></button>
                 <button v-else class="btn btn-danger" :disabled="getDeleteLoad" @click="removeFromStorage(user.user_id)"> <i class="fas fa-trash"></i></button>
               </td>
               <td>
@@ -76,7 +76,6 @@ export default {
   name: 'Users',
   data(){
     return {
-      onlineState: false,
       deleteLoading: false
     }
   },
@@ -86,9 +85,7 @@ export default {
   },
 
   watch: {
-    getIsInternetConnected(){
-      this.$store.state.isInternetConnected = this.$store.getters.getIsInternetConnected
-    },
+
     isInternetConnected(result){
       if (!this.$store.state.isInternetConnected) {
         setTimeout(() => {
@@ -103,11 +100,8 @@ export default {
       }
     }
   },
-	created(){
+	mounted(){
     this.fetchAllUsers()
-  },
-  mounted(){
-    this.onlineState = this.$store.getters.getIsInternetConnected
   },
 
   methods: {

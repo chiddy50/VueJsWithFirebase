@@ -72,16 +72,12 @@ export default{
     ...mapGetters(["getIsInternetConnected", "getFetchLoad", "getCreateLoad"]),
 
 	},
-	created(){
+	mounted(){
     this.fetchAllUsers()
   },
-  mounted(){
-    this.onlineState = this.getIsInternetConnected
-  },
+
   watch: {
-    getIsInternetConnected: function(){
-      this.isInternetConnected = this.getIsInternetConnected
-    },
+
     isInternetConnected: function(result){
       if (!this.isInternetConnected) {
         setTimeout(() => {
