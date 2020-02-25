@@ -86,11 +86,11 @@ export default {
   },
 
   watch: {
-    getIsInternetConnected: function(){
-      this.isInternetConnected = this.getIsInternetConnected
+    getIsInternetConnected(){
+      this.$store.state.isInternetConnected = this.$store.getters.getIsInternetConnected
     },
-    isInternetConnected: function(result){
-      if (!this.isInternetConnected) {
+    isInternetConnected(result){
+      if (!this.$store.state.isInternetConnected) {
         setTimeout(() => {
           Swal.fire({
           position: 'top-end',
@@ -107,7 +107,7 @@ export default {
     this.fetchAllUsers()
   },
   mounted(){
-    this.onlineState = this.getIsInternetConnected
+    this.onlineState = this.$store.getters.getIsInternetConnected
   },
 
   methods: {

@@ -35,5 +35,9 @@ export default{
 
   resetForm: function(context){
     context.commit('resetForm');
+  },
+
+  setConnection: function(context, payload){
+    context.commit('setConnection', payload);
   }
 };

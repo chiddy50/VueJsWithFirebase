@@ -4,7 +4,7 @@ import db from '../components/firebaseInit';
 
 export default{
   fetchAllUsers(state){
-    let self = this;
+    var self = this;
     if (state.isInternetConnected) {
       state.fetchUsersLoading = true;
       db.collection('users').orderBy('blood_group').get()
@@ -19,7 +19,7 @@ export default{
           };
           state.users.push(data);
         });
-        self.updateAllUsersStorage();
+        // this.updateAllUsersStorage();
 
         //Check if no  users
         self.commit('checkError');
@@ -156,7 +156,6 @@ export default{
     if (confirm('Are your sure?')) {
       let users = JSON.parse(localStorage.getItem('users'));
       const userExists = users.some(user => user.user_id === payload);
-      if(userExists){
         state.deleteLoading = true;
         var unwantedUser = state.users.find(user => {
           return user.user_id === payload;
@@ -171,16 +170,6 @@ export default{
           showConfirmButton: false,
           timer: 1500
         });
-
-      }else{
-        Swal.fire({
-          position: 'top-end',
-          icon: 'error',
-          title: 'This user does not exist',
-          showConfirmButton: false,
-          timer: 1500
-        });
-      }
     }
   },
 
@@ -199,4 +188,8 @@ export default{
       error.style.display = 'block';
     }
   },
+
+  setConnection(state, payload){
+    state.isInternetConnected = payload;
+  }
 };

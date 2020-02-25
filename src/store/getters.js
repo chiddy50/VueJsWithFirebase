@@ -1,5 +1,5 @@
 export default {
-  getIsInternetConnected: state => {
+  getIsInternetConnected(state){
     return state.isInternetConnected;
   },
   getUsers(state){
