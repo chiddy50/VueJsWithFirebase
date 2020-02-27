@@ -96,7 +96,7 @@ export default{
           showConfirmButton: false,
           timer: 1500
         })
-        }, 3000);
+        }, 5000);
       }
     }
   },

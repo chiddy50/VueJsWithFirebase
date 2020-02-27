@@ -28,19 +28,12 @@
     <div v-if="$store.state.fetchUsersLoading" class="col-sm-12 col-md-12 col-lg-12 pb-3">
       <h5 class="text-center">Loading Users...</h5>
     </div>
-    <div class='row mb-4'>
-      <div class="col-xs-12 col-sm-3 col-md-3 col-lg-3 mb-2">
-        <button class="btn btn-success" @click="page1_25">Users 1-25</button>
-      </div>
-      <div class="col-xs-12 col-sm-3 col-md-3 col-lg-3 mb-2">
-        <button :disabled="$store.getters.disablePage26_50" class="btn btn-danger" @click="page26_50">Users 26-50</button>
-      </div>
-      <div class="col-xs-12 col-sm-3 col-md-3 col-lg-3 mb-2">
-        <button :disabled="$store.getters.disablePage51_75" class="btn btn-warning" @click="page51_75">Users 51-75</button>
-      </div>
-      <div class="col-xs-12 col-sm-3 col-md-3 col-lg-3 mb-2">
-        <button :disabled="$store.getters.disablePage75_100" class="btn btn-primary" @click="page76_100">Users 76-100</button>
-      </div>
+
+    <div class="btn-group mb-3">
+      <button class="btn btn-success" @click="page1_25">Users 1-25</button>
+      <button v-if="!$store.getters.disablePage26_50" class="btn btn-danger" @click="page26_50">Users 26-50</button>
+      <button v-if="!$store.getters.disablePage51_75" class="btn btn-warning" @click="page51_75">Users 51-75</button>
+      <button v-if="!$store.getters.disablePage75_100" class="btn btn-primary" @click="page76_100">Users 76-100</button>
     </div>
 
     <div class='row'>
@@ -90,7 +83,7 @@ export default {
           showConfirmButton: false,
           timer: 1500
         })
-        }, 3000);
+        }, 5000);
       }
     }
   },
