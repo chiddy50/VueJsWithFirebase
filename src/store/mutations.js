@@ -5,8 +5,8 @@ import db from '../components/firebaseInit';
 export default{
   fetchAllUsers(state){
     var self = this;
-    state.users = [];
     if (state.isInternetConnected) {
+      state.users = [];
       state.fetchUsersLoading = true;
       db.collection('users').orderBy('blood_group').get()
       .then(querySnapshot => {
@@ -20,13 +20,14 @@ export default{
           };
           state.users.push(data);
         });
-        // this.updateAllUsersStorage();
+        self.commit('updateAllUsersStorage');
 
         //Check if no  users
         self.commit('checkError');
       })
       .catch(error => {
         console.error(error);
+      self.commit('getLocalStorage');
       })
       .finally(() => {
         state.fetchUsersLoading = false;
@@ -149,6 +150,14 @@ export default{
     state.users.push(payload);
     localStorage.setItem('users', JSON.stringify(state.users));
     this.commit('resetForm');
+    // this.commit('fetchAllUsers');
+    Swal.fire({
+      position: 'top-end',
+      icon: 'success',
+      title: 'User Added',
+      showConfirmButton: false,
+      timer: 1500
+    });
   },
 
   editUser(state, payload){
