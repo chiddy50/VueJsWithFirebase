@@ -74,7 +74,7 @@ export default {
   watch: {
 
     isInternetConnected(result){
-      if (!this.$store.state.isInternetConnected) {
+      if (!this.$store.state.isInternetConnected && this.network === 'slow-2g') {
         setTimeout(() => {
           Swal.fire({
           position: 'top-end',
@@ -83,7 +83,7 @@ export default {
           showConfirmButton: false,
           timer: 1500
         })
-        }, 5000);
+        }, 10000);
       }
     }
   },

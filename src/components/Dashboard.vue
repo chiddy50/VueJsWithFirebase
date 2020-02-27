@@ -25,16 +25,16 @@
             </div>
 
             <div v-if="$store.state.createLoading" class="col-sm-12 col-md-12 col-lg-12 mb-3">
-              <div class="box pt-3">
+              <div class="box py-3">
                 <div class="head p-3">
-                  <h5 class="text-center">Creating User please wait...</h5>
+                  <div class="spinner-border text-danger"></div>
                 </div>
               </div>
             </div>
 
             <div v-if="$store.state.fetchUsersLoading" class="col-sm-12 col-md-12 col-lg-12 mb-3">
-              <div class="box">
-                <div class="head pb-3">
+              <div class="box py-3">
+                <div class="head">
                   <h5 class="text-center p-2">Please wait...</h5>
                 </div>
               </div>
@@ -87,7 +87,7 @@ export default{
   watch: {
 
     isInternetConnected: function(result){
-      if (!this.isInternetConnected) {
+      if (!this.isInternetConnected && this.network === 'slow-2g') {
         setTimeout(() => {
           Swal.fire({
           position: 'top-end',
@@ -96,7 +96,7 @@ export default{
           showConfirmButton: false,
           timer: 1500
         })
-        }, 5000);
+        }, 10000);
       }
     }
   },

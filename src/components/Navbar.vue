@@ -18,10 +18,10 @@
                       <router-link class="nav-link anchor-tags" tag="a" to="/all-users">Users  <i class="fa fa-user"></i></router-link>
                     </li>
                     <li v-if="$store.state.isInternetConnected" class="nav-item">
-                      <a disabled class="nav-link online">Online Mode</a>
+                      <a disabled class="nav-link online">Online Mode <i class="fa fa-wifi"></i></a>
                     </li>
                     <li v-else class="nav-item">
-                      <a disabled class="offline">Offline Mode</a>
+                      <a disabled class="offline">Offline Mode <i class="fa fa-wifi"></i></a>
                     </li>
                 </ul>
             </div>
