@@ -60,6 +60,7 @@ export default{
         state.createLoading = true;
         db.collection('users').add(user)
         .then(docRef => {
+          state.createLoading = false;
           Swal.fire({
             position: 'top-end',
             icon: 'success',
@@ -78,7 +79,7 @@ export default{
           self.commit('resetForm');
         })
         .catch(err => console.error(err))
-        .finally(() => self.createLoading = false );
+        .finally(() => state.createLoading = false );
       }else{
         self.commit('addToStorage', user);
       }

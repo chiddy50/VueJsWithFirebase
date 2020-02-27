@@ -24,10 +24,18 @@
                 </form>
             </div>
 
+            <div v-if="$store.state.createLoading" class="col-sm-12 col-md-12 col-lg-12 mb-3">
+              <div class="box">
+                <div class="head pb-3">
+                  <h5 class="text-center p-2">Creating User please wait...</h5>
+                </div>
+              </div>
+            </div>
+
             <div v-if="$store.state.fetchUsersLoading" class="col-sm-12 col-md-12 col-lg-12 mb-3">
               <div class="box">
                 <div class="head pb-3">
-                  <h5 class="text-center">Please wait...</h5>
+                  <h5 class="text-center p-2">Please wait...</h5>
                 </div>
               </div>
             </div>
