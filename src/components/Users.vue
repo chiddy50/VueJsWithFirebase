@@ -28,34 +28,24 @@
     <div v-if="$store.state.fetchUsersLoading" class="col-sm-12 col-md-12 col-lg-12 pb-3">
       <h5 class="text-center">Loading Users...</h5>
     </div>
+    <div class='row mb-4'>
+      <div class="col-xs-12 col-sm-3 col-md-3 col-lg-3 mb-2">
+        <button class="btn btn-success" @click="page1_25">Users 1-25</button>
+      </div>
+      <div class="col-xs-12 col-sm-3 col-md-3 col-lg-3 mb-2">
+        <button :disabled="$store.getters.disablePage26_50" class="btn btn-danger" @click="page26_50">Users 26-50</button>
+      </div>
+      <div class="col-xs-12 col-sm-3 col-md-3 col-lg-3 mb-2">
+        <button :disabled="$store.getters.disablePage51_75" class="btn btn-warning" @click="page51_75">Users 51-75</button>
+      </div>
+      <div class="col-xs-12 col-sm-3 col-md-3 col-lg-3 mb-2">
+        <button :disabled="$store.getters.disablePage75_100" class="btn btn-primary" @click="page76_100">Users 76-100</button>
+      </div>
+    </div>
 
     <div class='row'>
       <div class="col-sm-12">
-        <table class="table table-dark">
-          <thead>
-            <tr>
-              <th>Name</th>
-              <th>Age</th>
-              <th>Blood Group</th>
-              <th colspan="2"></th>
-            </tr>
-          </thead>
-          <tbody>
-            <tr v-for="(user, index) in users" :key="user.user_id">
-              <td>{{ user.name }}</td>
-              <td>{{ user.age }}</td>
-              <td>{{ user.blood_group }}</td>
-              <td>
-                <button v-if="$store.state.isInternetConnected" :disabled="$store.state.deleteLoading" class="btn btn-danger" @click="deleteUser(user.user_id, index)"> <i class="fas fa-trash"></i></button>
-                <button v-else class="btn btn-danger" :disabled="$store.state.deleteLoading" @click="removeFromStorage(user.user_id)"> <i class="fas fa-trash"></i></button>
-              </td>
-              <td>
-                <button class="btn btn-primary" @click="editUser(user)"> <i class="fas fa-pencil-alt"></i></button>
-              </td>
-            </tr>
-          </tbody>
-        </table>
-
+        <TablePagination/>
 
         <div class="center-div" id="no-users">
           <h4 class="text-center">No Users</h4>
@@ -71,6 +61,7 @@
 import db from './firebaseInit'
 import Swal from 'sweetalert2'
 import { mapGetters, mapActions, mapState } from 'vuex'
+import TablePagination from './TablePagination.vue'
 
 export default {
   name: 'Users',
@@ -79,9 +70,12 @@ export default {
       deleteLoading: false
     }
   },
+  components: {
+    TablePagination
+  },
   computed: {
     ...mapState(['isInternetConnected', 'users','edit', 'blood_groups']),
-    ...mapGetters(["getIsInternetConnected"])
+    ...mapGetters(["getIsInternetConnected", "disablePage26_50"])
   },
 
   watch: {
@@ -102,32 +96,11 @@ export default {
   },
 	mounted(){
     this.fetchAllUsers()
+    this.page1_25()
   },
 
   methods: {
-    ...mapActions(['fetchAllUsers', 'editUser', 'updateUser', 'updateStorage', 'removeFromStorage']),
-
-    deleteUser(id, index){
-      this.deleteLoading = true
-      if (confirm('Are your sure?')) {
-        db.collection('users').where('user_id', '==', id).get()
-        .then(querySnapshot => {
-          querySnapshot.forEach(doc => {
-            doc.ref.delete()
-            this.$store.state.users.splice(index, 1)
-            Swal.fire({
-              position: 'top-end',
-              icon: 'success',
-              title: 'User has been deleted',
-              showConfirmButton: false,
-              timer: 1500
-            })
-          })
-        })
-        .catch(err => console.error(err) )
-        .finally(() => this.deleteLoading = false )
-      }
-    }
+    ...mapActions(['fetchAllUsers', 'updateUser', 'updateStorage', 'page1_25', 'page26_50', 'page51_75', 'page76_100']),
 
   }
 }

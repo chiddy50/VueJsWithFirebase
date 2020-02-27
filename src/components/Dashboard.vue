@@ -15,7 +15,7 @@
                             <option v-for="(group, index) in blood_groups" :value="group" :key="index">{{ group }}</option>
                         </select>
                         <div v-if="getIsInternetConnected" class="input-group-append">
-                          <button @click.prevent="saveUser" class="input-group-text btn btn-info">Add</button>
+                          <button :disabled="$store.state.createLoading" @click.prevent="saveUser" class="input-group-text btn btn-info">{{ btnText }}</button>
                         </div>
                         <div v-else class="input-group-append">
                           <button :disabled="$store.state.createLoading" @click.prevent="saveUser" class="input-group-text btn btn-info">Add</button>
@@ -70,7 +70,7 @@ export default{
     AgeChart
   },
 	computed: {
-    ...mapState(['isInternetConnected', 'users', 'edit', 'blood_groups']),
+    ...mapState(['isInternetConnected', 'users', 'edit', 'blood_groups', 'network']),
     ...mapGetters(["getIsInternetConnected"]),
     btnText(){
       if (this.$store.state.createLoading) {

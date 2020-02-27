@@ -1,5 +1,7 @@
 export default{
+  network: window.navigator.connection.effectiveType,
   users: [],
+  paginationUsers: [],
   isInternetConnected: false,
   fetchUsersLoading: false,
   createLoading: false,
@@ -13,3 +15,4 @@ export default{
   blood_group: null,
   blood_groups: ['A+', 'A-', 'B+', 'B-', 'O+', 'O-', 'AB+', 'AB-']
 };
+

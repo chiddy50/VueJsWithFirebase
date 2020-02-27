@@ -21,13 +21,15 @@ export default{
           state.users.push(data);
         });
         self.commit('updateAllUsersStorage');
-
+        if (!state.users.length) {
+          self.commit('getLocalStorage');
+        }
         //Check if no  users
         self.commit('checkError');
       })
       .catch(error => {
         console.error(error);
-      self.commit('getLocalStorage');
+
       })
       .finally(() => {
         state.fetchUsersLoading = false;
@@ -170,24 +172,27 @@ export default{
     state.blood_group = payload.blood_group;
   },
 
-  removeFromStorage(state, payload){
+  removeFromStorage(state, [user_id, index]){
+    // let user_id = payload[0];
+    // let index = payload[1];
+
     if (confirm('Are your sure?')) {
-      let users = JSON.parse(localStorage.getItem('users'));
-      const userExists = users.some(user => user.user_id === payload);
-        state.deleteLoading = true;
-        var unwantedUser = state.users.find(user => {
-          return user.user_id === payload;
-        });
-        state.users = state.users.filter(user => user.user_id !== unwantedUser.user_id );
-        localStorage.setItem('users', JSON.stringify(state.users));
-        state.deleteLoading = false;
-        Swal.fire({
-          position: 'top-end',
-          icon: 'success',
-          title: 'User has been removed',
-          showConfirmButton: false,
-          timer: 1500
-        });
+      // let users = JSON.parse(localStorage.getItem('users'));
+      // const userExists = users.some(user => user.user_id === user_id);
+      var unwantedUser = state.users.find(user => {
+        return user.user_id === user_id;
+      });
+      state.users = state.users.filter(user => user.user_id !== unwantedUser.user_id );
+      localStorage.setItem('users', JSON.stringify(state.users));
+      state.paginationUsers.splice(index, 1);
+
+      Swal.fire({
+        position: 'top-end',
+        icon: 'success',
+        title: 'User has been removed',
+        showConfirmButton: false,
+        timer: 1500
+      });
     }
   },
 
@@ -209,5 +214,31 @@ export default{
 
   setConnection(state, payload){
     state.isInternetConnected = payload;
-  }
+  },
+  // Pagination methods
+  removePaginateUser(state){
+    state.users.splice(index, 1);
+  },
+
+  page1_25(state){
+    var page_0_25 = state.users.slice(0, 24);
+    state.paginationUsers = page_0_25;
+  },
+
+  page26_50(state){
+    var page_26_50 = state.users.slice(25, 49);
+    state.paginationUsers = page_26_50;
+  },
+
+  page51_75(state){
+    var page_51_75 = state.users.slice(50, 74);
+    state.paginationUsers = page_51_75;
+  },
+
+  page76_100(state){
+    var page_76_100 = state.users.slice(75);
+    state.paginationUsers = page_76_100;
+  },
+
+
 };

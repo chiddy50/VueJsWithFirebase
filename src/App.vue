@@ -32,4 +32,8 @@ export default {
 *{
   font-family: 'Roboto';
 }
+
+body{
+  overflow-x: hidden !important;
+}
 </style>

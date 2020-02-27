@@ -39,5 +39,19 @@ export default{
 
   setConnection: function(context, payload){
     context.commit('setConnection', payload);
-  }
+  },
+
+  // Pagination actions
+  page1_25: function(context){
+    context.commit('page1_25');
+  },
+  page26_50: function(context){
+    context.commit('page26_50');
+  },
+  page51_75: function(context){
+    context.commit('page51_75');
+  },
+  page76_100: function(context){
+    context.commit('page76_100');
+  },
 };

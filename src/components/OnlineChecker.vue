@@ -11,10 +11,10 @@ export default {
 
   beforeCreate(){
     setInterval(() => {
-      if (window.navigator.onLine) {
-        this.setConnection(true)
-      }else{
+      if (!window.navigator.onLine || window.navigator.connection.effectiveType === "slow-2g") {
         this.setConnection(false)
+      }else{
+        this.setConnection(true)
       }
     }, 1000);
   },
