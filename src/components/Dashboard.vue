@@ -25,9 +25,9 @@
             </div>
 
             <div v-if="$store.state.createLoading" class="col-sm-12 col-md-12 col-lg-12 mb-3">
-              <div class="box">
-                <div class="head pb-3">
-                  <h5 class="text-center p-2">Creating User please wait...</h5>
+              <div class="box pt-3">
+                <div class="head p-3">
+                  <h5 class="text-center">Creating User please wait...</h5>
                 </div>
               </div>
             </div>
