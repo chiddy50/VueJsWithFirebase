@@ -90,7 +90,7 @@ export default{
   },
 
   updateUser(state){
-    state.updateLoading = false;
+    state.updateLoading = true;
     let self = this;
     db.collection('users').where('user_id', '==', state.user_id).get()
     .then(querySnapshot => {
@@ -102,10 +102,12 @@ export default{
           blood_group: state.blood_group
         })
         .then(() => {
+          state.updateLoading = false;
+
           self.commit('updateStorage');
         })
         .finally(() => {
-          state.updateLoading = true;
+          state.updateLoading = false;
           self.commit('resetForm');
         });
       });
@@ -173,8 +175,6 @@ export default{
   },
 
   removeFromStorage(state, [user_id, index]){
-    // let user_id = payload[0];
-    // let index = payload[1];
 
     if (confirm('Are your sure?')) {
       // let users = JSON.parse(localStorage.getItem('users'));

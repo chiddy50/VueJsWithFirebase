@@ -11,7 +11,8 @@ export default {
 
   beforeCreate(){
     setInterval(() => {
-      if (!window.navigator.onLine || window.navigator.connection.effectiveType === "slow-2g" || window.navigator.connection.effectiveType === "2g") {
+      if (!window.navigator.onLine || window.navigator.connection.effectiveType === "slow-2g") {
+      // if (!window.navigator.onLine || window.navigator.connection.effectiveType === "slow-2g" || window.navigator.connection.effectiveType === "2g") {
         this.setConnection(false)
       }else{
         this.setConnection(true)
