@@ -30,11 +30,15 @@
     </div>
 
     <div class="btn-group mb-3">
-      <button class="btn btn-success" @click="page1_25">Users 1-25</button>
+      <button v-if="$store.state.users.length" class="btn btn-success" @click="page1_25">Users 1-25</button>
       <button v-if="!$store.getters.disablePage26_50" class="btn btn-danger" @click="page26_50">Users 26-50</button>
+    </div>
+
+    <div class="btn-group mb-3">
       <button v-if="!$store.getters.disablePage51_75" class="btn btn-warning" @click="page51_75">Users 51-75</button>
       <button v-if="!$store.getters.disablePage75_100" class="btn btn-primary" @click="page76_100">Users 76-100</button>
     </div>
+
 
     <div class='row'>
       <div class="col-sm-12">
@@ -70,22 +74,6 @@ export default {
     ...mapGetters(["getIsInternetConnected", "disablePage26_50"])
   },
 
-  watch: {
-
-    isInternetConnected(result){
-      if (!this.$store.state.isInternetConnected && this.network === 'slow-2g') {
-        setTimeout(() => {
-          Swal.fire({
-          position: 'top-end',
-          icon: 'error',
-          title: 'You are now offline',
-          showConfirmButton: false,
-          timer: 1500
-        })
-        }, 10000);
-      }
-    }
-  },
 	mounted(){
     this.fetchAllUsers()
     this.page1_25()

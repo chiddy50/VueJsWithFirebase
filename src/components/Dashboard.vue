@@ -70,7 +70,7 @@ export default{
     AgeChart
   },
 	computed: {
-    ...mapState(['isInternetConnected', 'users', 'edit', 'blood_groups', 'network']),
+    ...mapState(['isInternetConnected', 'users', 'edit', 'blood_groups']),
     ...mapGetters(["getIsInternetConnected"]),
     btnText(){
       if (this.$store.state.createLoading) {
@@ -84,22 +84,22 @@ export default{
     this.fetchAllUsers()
   },
 
-  watch: {
+  // watch: {
 
-    isInternetConnected: function(result){
-      if (!this.isInternetConnected && this.network === 'slow-2g') {
-        setTimeout(() => {
-          Swal.fire({
-          position: 'top-end',
-          icon: 'error',
-          title: 'You are now offline',
-          showConfirmButton: false,
-          timer: 1500
-        })
-        }, 10000);
-      }
-    }
-  },
+  //   isInternetConnected: function(result){
+  //     if (!this.isInternetConnected) {
+  //       setTimeout(() => {
+  //         Swal.fire({
+  //         position: 'top-end',
+  //         icon: 'error',
+  //         title: 'You are now offline',
+  //         showConfirmButton: false,
+  //         timer: 1500
+  //       })
+  //       }, 10000);
+  //     }
+  //   }
+  // },
 
   methods: {
     ...mapActions(['fetchAllUsers', 'saveUser'])
