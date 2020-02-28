@@ -29,16 +29,12 @@
       <h5 class="text-center">Loading Users...</h5>
     </div>
 
-    <div class="btn-group mb-3">
-      <button v-if="$store.state.users.length" class="btn btn-success" @click="page1_25">Users 1-25</button>
-      <button v-if="!$store.getters.disablePage26_50" class="btn btn-danger" @click="page26_50">Users 26-50</button>
-    </div>
-
-    <div class="btn-group mb-3">
-      <button v-if="!$store.getters.disablePage51_75" class="btn btn-warning" @click="page51_75">Users 51-75</button>
-      <button v-if="!$store.getters.disablePage75_100" class="btn btn-primary" @click="page76_100">Users 76-100</button>
-    </div>
-
+    <ul v-if="$store.state.users.length" class="pagination pagination-sm">
+      <li class="page-item"><a class="page-link" @click.prevent="page1_25" href="#">1-25</a></li>
+      <li v-if="!$store.getters.disablePage26_50" class="page-item"><a @click.prevent="page26_50" class="page-link" href="#">26-50</a></li>
+      <li v-if="!$store.getters.disablePage51_75" class="page-item"><a @click.prevent="page51_75" class="page-link" href="#">51-75</a></li>
+      <li v-if="!$store.getters.disablePage75_100" class="page-item"><a @click.prevent="page76_100" class="page-link" href="#">76-100</a></li>
+    </ul>
 
     <div class='row'>
       <div class="col-sm-12">
